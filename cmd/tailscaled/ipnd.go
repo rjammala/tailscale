@@ -25,6 +25,7 @@ import (
 func main() {
 	fake := getopt.BoolLong("fake", 0, "fake tunnel+routing instead of tuntap")
 	debug := getopt.StringLong("debug", 0, "", "Address of debug server")
+	statepath := getopt.StringLong("state", 0, "", "Path of state file")
 
 	logf := wgengine.RusagePrefixLog(log.Printf)
 
@@ -55,6 +56,7 @@ func main() {
 	e = wgengine.NewWatchdog(e)
 
 	opts := ipnserver.Options{
+		StatePath:          *statepath,
 		SurviveDisconnects: true,
 		AllowQuit:          false,
 	}
